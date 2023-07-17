@@ -18,16 +18,17 @@ namespace SaleSampleAPI.Controllers
         }
 
         [HttpGet]
-        public Product Get(int id)
+        public object Get(int id)
         {
             //call services to get produc
-
-            return _productService.GetProductById(id);
+            Product product = _productService.GetProductById(id);
+            return new { product };
         }
 
         [HttpPost]
         public bool Post(Product product)
         {
+
             return _productService.AddNewProduct(product);
         }
 
