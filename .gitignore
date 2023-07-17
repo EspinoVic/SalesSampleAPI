@@ -4,6 +4,7 @@
 
 /SaleSampleAPI/Models/dClass.cs
 
-/SaleSampleAPI/bin/*
+/SaleSampleAPI/bin
+/SaleSampleAPI/obj
 /.vs
-.vs/*
+
