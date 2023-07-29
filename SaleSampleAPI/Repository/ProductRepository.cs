@@ -1,37 +1,53 @@
-﻿using SaleSampleAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using SaleSampleAPI.Data;
 using SaleSampleAPI.Models;
+using SaleSampleAPI.Repository.interfaces;
 
 namespace SaleSampleAPI.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        //Injection
-        private ProductContext _productContext;
+        //Injected
+        private SalesContext _salesContext;
 
-        public ProductRepository(ProductContext productContext)
+        public ProductRepository(SalesContext productContext)
         {
-            _productContext = productContext;
+            _salesContext = productContext;
         }
 
         public int AddProduct(Product product)
         {
-            this._productContext.Add(product);
+            this._salesContext.Add(product);
             
-            return this._productContext.SaveChanges();
+            return this._salesContext.SaveChanges();
         }
 
         public int UpdateProduct(Product product)
         {
-            this._productContext.Update(product);
-
-            return this._productContext.SaveChanges();
+            this._salesContext.Update(product);
+            //this._salesContext.Database.SqlQuery()
+            return this._salesContext.SaveChanges();
         }
 
         public Product GetProduct(int id)
         {
-            Product product = this._productContext.Product.Where(product => product.Id == id).FirstOrDefault();
+            Product product = this._salesContext.Product.Where(product => product.Id == id).FirstOrDefault();
             return product;
         }
+
+        public List<Product> GetProducts(List<int> ids) 
+        {
+            var result =
+                from products in this._salesContext.Product
+                join prodsRequired in ids
+                    on products.Id equals prodsRequired
+                select products;
+
+            return result.ToList();
+        }
+
+
 
     }
 }

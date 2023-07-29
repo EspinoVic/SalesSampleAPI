@@ -1,6 +1,6 @@
 ﻿using SaleSampleAPI.Models;
 
-namespace SaleSampleAPI.Services
+namespace SaleSampleAPI.Services.interfaces
 {
     public interface IProductService
     {

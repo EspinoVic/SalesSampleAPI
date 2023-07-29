@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SaleSampleAPI.Models;
-using SaleSampleAPI.Services;
+using SaleSampleAPI.Services.interfaces;
 
 namespace SaleSampleAPI.Controllers
 {

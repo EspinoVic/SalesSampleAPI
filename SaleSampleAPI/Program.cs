@@ -3,12 +3,17 @@ using SaleSampleAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using SaleSampleAPI.Repository;
 using SaleSampleAPI.Services;
+using SaleSampleAPI.Services.interfaces;
+using SaleSampleAPI.Repository.interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ProductContext>
+//also injects the existing DBContexts
+builder.Services.AddDbContext<SalesContext>
     (options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("ProductContext") 
+        builder.Configuration.GetConnectionString("SalesDB")
+        //builder.Configuration.GetConnectionString("ProductContext")
+
         //get the ConnStr from appseeting.json
         )
     );
@@ -21,10 +26,14 @@ builder.Services.AddSwaggerGen();
 //kind of register the controllers but they are not recognized until you map them (app.MapControllers)
 builder.Services.AddControllers();
 
-//Injections, must use interfaces to allow mocking god
+//Injections, must use interfaces to allow mocking god - dios god - esta god 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<ISalesService, SalesService>();
+
+/*builder.Services.AddScoped<>*/
 
 
 var app = builder.Build();

@@ -1,5 +1,6 @@
 ﻿using SaleSampleAPI.Models;
-using SaleSampleAPI.Repository;
+using SaleSampleAPI.Repository.interfaces;
+using SaleSampleAPI.Services.interfaces;
 
 namespace SaleSampleAPI.Services
 {

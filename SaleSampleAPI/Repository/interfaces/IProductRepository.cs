@@ -1,6 +1,6 @@
 ﻿using SaleSampleAPI.Models;
 
-namespace SaleSampleAPI.Repository
+namespace SaleSampleAPI.Repository.interfaces
 {
     public interface IProductRepository
     {
@@ -8,6 +8,7 @@ namespace SaleSampleAPI.Repository
         public int AddProduct(Product product);
         public int UpdateProduct(Product product);
         public Product GetProduct(int id);
+        public List<Product> GetProducts(List<int> ids);
 
     }
 }
