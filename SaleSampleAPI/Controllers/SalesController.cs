@@ -27,6 +27,7 @@ namespace SaleSampleAPI.Controllers
         }
 
         [HttpGet]
+        [Route("api/[controller]/Total")]
         public float Total(int saleId)//return total sale
         {
            /* if(saleId < 1) //there won't neve be an id < 1
@@ -34,12 +35,13 @@ namespace SaleSampleAPI.Controllers
                 throw new ArgumentOutOfRangeException(nameof(saleId));
             }*/
 
-            double total = this._salesService.TotalSale(saleId);
+            float total = (float) this._salesService.TotalSale(saleId);
             return total; 
         }
 
 
         [HttpGet]
+        [Route("api/[controller]/Detail")]
         public List<Product> Detail(int saleId)//return products
         {
             List<Product> products = this._salesService.DetailSale(saleId);

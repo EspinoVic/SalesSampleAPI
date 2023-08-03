@@ -6,7 +6,7 @@ using SaleSampleAPI.Services.interfaces;
 namespace SaleSampleAPI.Controllers
 {
     //Controllers are the actions the user (consumer) can call. and can have some restrictions using authorization.
-    [Route("api/[controller]")]
+    [Route("api/Product")]
     [ApiController]
     public class ProductController : ControllerBase
     {

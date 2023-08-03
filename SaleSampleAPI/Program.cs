@@ -33,6 +33,9 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<ISalesService, SalesService>();
 
+builder.Services.AddScoped<ITaxesRegionRepository, TaxesRegionRepository>();
+
+
 /*builder.Services.AddScoped<>*/
 
 
