@@ -63,3 +63,15 @@ INSERT INTO [dbo].[TaxesRegion]
 		   ,('CL',19)
 GO
 
+INSERT INTO [dbo].[Product]
+           ([productName]
+           ,[cost]
+           ,[salesPrice]
+           ,[inventoryAmount])
+     VALUES
+           ('maruchan',34,50,45),
+		   ('Soja',52,72,67),
+		   ('Halls god',76,90,89)
+GO
+
+
