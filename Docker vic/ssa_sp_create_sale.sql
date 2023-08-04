@@ -38,7 +38,7 @@ BEGIN
                         INNER JOIN dbo.Product P
                         ON P.Id = pil.idProduct
                 )
-                =
+                !=
                 (
                     SELECT COUNT(pil.idProduct) 
                     FROM @productsIdList pil
@@ -89,7 +89,7 @@ BEGIN
             INSERT INTO @Temp
             SELECT InvDiff FROM InvCalc;
 
-            IF EXISTS(SELECT InvDiff FROM InvCalc WHERE InvDiff < 0)
+            IF EXISTS(SELECT InvDiff FROM @Temp WHERE InvDiff < 0)
                 BEGIN
                     THROW 54321, 'Algunos de los productos requeridos no están en existencia.',1;
                 END 

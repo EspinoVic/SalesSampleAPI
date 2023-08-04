@@ -31,7 +31,8 @@ namespace SaleSampleAPI.Repository
             {
                 ParameterName = "productsIdList",
                 Value = dtProduct,
-                SqlDbType = SqlDbType.Structured
+                SqlDbType = SqlDbType.Structured,
+                TypeName = "dbo.ListProductsToBuy"
             };
 
             return this._salesContext.Database.ExecuteSqlRaw("ssa_sp_create_sale",regionID, productList);
