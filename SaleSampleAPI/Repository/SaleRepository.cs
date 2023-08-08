@@ -45,12 +45,16 @@ namespace SaleSampleAPI.Repository
 
         public float GetSalePrice(int saleId)
         {
+            //it may not be correct, service must implement the logic, so repository is not going to do Sale Math.
             throw new NotImplementedException();
         }
 
         public List<SaleProducts> GetSaleProducts(int saleId)
         {
-            throw new NotImplementedException();
+            List<SaleProducts> saleProducts
+                = this._salesContext.SaleProducts.Where(saleProd => saleProd.idSale == saleId).ToList();
+
+            return saleProducts;
         }
     }
 }

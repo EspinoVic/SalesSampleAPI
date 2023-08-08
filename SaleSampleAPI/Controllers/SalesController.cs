@@ -42,9 +42,9 @@ namespace SaleSampleAPI.Controllers
 
         [HttpGet]
         [Route("api/[controller]/Detail")]
-        public List<Product> Detail(int saleId)//return products
+        public List<Tuple<Product, int>>  Detail(int saleId)//return products
         {
-            List<Product> products = this._salesService.DetailSale(saleId);
+            List<Tuple<Product, int>> products = this._salesService.DetailSale(saleId);
 
             return products;
         }

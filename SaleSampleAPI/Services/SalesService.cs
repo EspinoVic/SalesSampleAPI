@@ -43,14 +43,40 @@ namespace SaleSampleAPI.Services
 
             return asd.ToList();
         }
+        public List<SaleProducts> GetSaleProducts(int saleId)
+        {
+            List<SaleProducts> products = this._saleRepository.GetSaleProducts(saleId);
 
-        public List<Product> DetailSale(int saleId)
+            return products.ToList();
+        }
+
+        public List<Tuple<Product, int>> DetailSale(int saleId)
         {
             //Reads on Sale_Product to get the Products
-            var products = this.GetSaleProductsIds(saleId);
- 
-            List<Product>  productsFromSale = this._productRepository.GetProducts(products);
-            return productsFromSale;            
+            var productsSale = this.GetSaleProducts(saleId); //ProdId and Amount bought
+
+            //now lets get the products itself
+            var productsId = from prod in productsSale
+                             select prod.idProduct;
+            List < Product > productsFromSale = this._productRepository.GetProducts(productsId.ToList());
+
+            //At this point we have the products model and the amount, we need to merge them
+
+            //Dictionary<Product, int> productsAmount = new Dictionary<Product, int>();
+
+            List<Tuple<Product,int>> productsAmount = new List<Tuple<Product,int>>();
+
+            
+            productsFromSale.ForEach(productsFromSale =>
+            {
+                productsAmount.Add(
+                    Tuple.Create(
+                        productsFromSale,
+                        productsSale.Where(prod => prod.idProduct == productsFromSale.Id).First().amount)
+                    );                
+            });
+
+            return productsAmount;            
         }
 
 

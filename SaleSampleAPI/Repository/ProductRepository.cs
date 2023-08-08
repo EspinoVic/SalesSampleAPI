@@ -38,8 +38,15 @@ namespace SaleSampleAPI.Repository
 
         public List<Product> GetProducts(List<int> ids) 
         {
+            var prods = (
+                        from products in this._salesContext.Product
+                        select products
+                        ).ToList()
+                        ;
+
+
             var result =
-                from products in this._salesContext.Product
+                from products in prods
                 join prodsRequired in ids
                     on products.Id equals prodsRequired
                 select products;
@@ -47,7 +54,6 @@ namespace SaleSampleAPI.Repository
             return result.ToList();
         }
 
-
-
+   
     }
 }
