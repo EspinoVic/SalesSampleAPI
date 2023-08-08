@@ -52,8 +52,15 @@ namespace SaleSampleAPI.Services
 
         public List<Tuple<Product, int>> DetailSale(int saleId)
         {
+            List<Tuple<Product, int>> productsAmount = new List<Tuple<Product, int>>();
+
             //Reads on Sale_Product to get the Products
             var productsSale = this.GetSaleProducts(saleId); //ProdId and Amount bought
+            if (productsSale == null || productsSale.Count == 0)
+            {
+                //log error
+                return productsAmount; //empty
+            }
 
             //now lets get the products itself
             var productsId = from prod in productsSale
@@ -61,10 +68,6 @@ namespace SaleSampleAPI.Services
             List < Product > productsFromSale = this._productRepository.GetProducts(productsId.ToList());
 
             //At this point we have the products model and the amount, we need to merge them
-
-            //Dictionary<Product, int> productsAmount = new Dictionary<Product, int>();
-
-            List<Tuple<Product,int>> productsAmount = new List<Tuple<Product,int>>();
 
             
             productsFromSale.ForEach(productsFromSale =>
@@ -87,7 +90,16 @@ namespace SaleSampleAPI.Services
             
             List<Product> productsFromSale = 
                 this._productRepository.GetProducts(GetSaleProductsIds(saleId));
+            if(productsFromSale == null || productsFromSale.Count == 0)
+            {
+                //log error
+                return -1;
+            }
             Sale sale = this._saleRepository.GetSale(saleId);
+            if(sale == null)
+            {
+                return -1;
+            }
             //and SUM the products' prices and calculate taxes according to the region
 
             //better to do composite? to avoid calling a lot of repositories. (complex entity framework object)

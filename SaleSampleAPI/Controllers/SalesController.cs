@@ -44,6 +44,7 @@ namespace SaleSampleAPI.Controllers
         [Route("api/[controller]/Detail")]
         public List<Tuple<Product, int>>  Detail(int saleId)//return products
         {
+            if (saleId < 1) throw new ArgumentException("Argumento no válido");
             List<Tuple<Product, int>> products = this._salesService.DetailSale(saleId);
 
             return products;

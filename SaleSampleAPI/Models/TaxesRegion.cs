@@ -6,9 +6,12 @@ namespace SaleSampleAPI.Models
     [Table("TaxesRegion")]
     public class TaxesRegion
     {
-        [Key]
-        public int RegionId { get; set; } 
+
+        [Key,Column("id")]
+        public int RegionId { get; set; }
+        [Column("taxesRegion")]
         public string TaxRegion { get; set; }
+        [Column("percentage")]
         public int Percentage { get; set; }
        
     }
